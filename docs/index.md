@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "Manage Model Docs"
+  name: "Manage Model"
   tagline: "One model, one place."
   actions:
     - theme: brand

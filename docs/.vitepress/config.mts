@@ -2,8 +2,8 @@ import { defineConfig } from "vitepress";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Manage Model Docs",
-  description: "One model, one place..",
+  title: "Manage Model",
+  description: "One model, one place.",
   cleanUrls: true,
   base: "/manage-model/",
 
