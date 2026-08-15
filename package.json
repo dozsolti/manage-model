@@ -16,7 +16,8 @@
   "license": "MIT",
   "devDependencies": {
     "ts-node": "^10.9.2",
-    "typescript": "^7.0.2",
+    "typedoc": "^0.28.20",
+    "typescript": "^6.0.3",
     "vitest": "^3.2.7"
   },
   "files": [

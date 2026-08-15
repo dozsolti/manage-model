@@ -1,0 +1,11 @@
+{
+    "name": "Manage Model",
+    "includeVersion": true,
+    "tsconfig": "tsconfig.json",
+    "entryPoints": [
+        "src/index.ts"
+    ],
+    "exclude": [
+        "**/*+.test.ts"
+    ],
+}

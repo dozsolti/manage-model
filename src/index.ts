@@ -1,11 +1,11 @@
 type CreatorFunction<T> = (data: T, ...args: any[]) => any;
 
-type ModelManagerConstants<T> = {
+export type ModelManagerConstants<T> = {
   templates?: Record<string, T>;
   inits?: Record<string, (data: any, ...args: any[]) => T>;
 };
 
-type ModelManager<T> = {
+export type ModelManager<T> = {
   to?: { [key: string]: CreatorFunction<T> };
 
   parsers?: {
