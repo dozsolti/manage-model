@@ -1,7 +1,7 @@
 {
   "name": "manage-model",
   "version": "0.0.1",
-  "description": "Every state changes in a single place.",
+  "description": "One model, one place.",
   "type": "module",
   "main": "./dist/cjs/index.js",
   "types": "./dist/types/index.d.ts",
@@ -10,13 +10,17 @@
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json",
     "clean": "rm -rf dist",
+    "docs": "cd docs && npm run docs:dev",
     "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dozsolti/manage-model.git"
   },
   "author": "Zsolt Domotor",
   "license": "MIT",
   "devDependencies": {
     "ts-node": "^10.9.2",
-    "typedoc": "^0.28.20",
     "typescript": "^6.0.3",
     "vitest": "^3.2.7"
   },

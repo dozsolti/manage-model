@@ -3,29 +3,64 @@ import { defineConfig } from "vitepress";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Manage Model Docs",
-  description: "Manage Model official documentations.",
+  description: "One model, one place..",
   cleanUrls: true,
   base: "/manage-model/",
-  appearance: "force-dark",
+
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Home", link: "/" },
-      { text: "Examples", link: "/markdown-examples" },
+      { text: "Model Manager API", link: "/manage-model" },
     ],
 
+    footer: {
+      message: "Released under the MIT License.",
+    },
     sidebar: [
       {
-        text: "Examples",
+        text: "Guide",
+        items: [{ text: "Get Started", link: "/get-started" }],
+      },
+      {
+        text: "Model Manager API",
         items: [
-          { text: "Markdown Examples", link: "/markdown-examples" },
-          { text: "Runtime API Examples", link: "/api-examples" },
+          {
+            text: "Constants",
+            link: "/manage-model/constants",
+            items: [
+              { text: "templates", link: "/manage-model/constants#templates" },
+              { text: "inits", link: "/manage-model/constants#inits" },
+            ],
+          },
+          {
+            text: "Functions",
+            link: "/manage-model/functions",
+            items: [
+              { text: "to", link: "/manage-model/functions#to" },
+              { text: "parsers", link: "/manage-model/functions#parsers" },
+              { text: "sorters", link: "/manage-model/functions#sorters" },
+              {
+                text: "validators",
+                link: "/manage-model/functions#validators",
+              },
+              {
+                text: "sanitizers",
+                link: "/manage-model/functions#sanitizers",
+              },
+              { text: "hooks", link: "/manage-model/functions#hooks" },
+            ],
+          },
         ],
+      },
+      {
+        text: "Examples",
+        items: [{ text: "Basic Usage", link: "/examples/basic" }],
       },
     ],
 
     socialLinks: [
-      { icon: "github", link: "https://github.com/vuejs/vitepress" },
+      { icon: "github", link: "https://github.com/dozsolti/manage-model" },
     ],
   },
 });
