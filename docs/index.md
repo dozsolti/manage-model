@@ -14,7 +14,11 @@ hero:
       link: /manage-model
 ---
 
-`manage-model` helps you define typed templates, initialization helpers, validation, sanitization, parsing, and lifecycle hooks.
+`manage-model` helps you define typed templates, initialization helpers, validation, sanitization, parsing, and many more.
+
+```bash
+npm install manage-model
+```
 
 ## With and Without
 
@@ -137,7 +141,7 @@ export const onNameChange = (data) => {
 };
 ```
 
-Keep related templates, initialization, validation, sanitization, parsing, and hooks together in one typed definition.
+Keep related templates, initialization, validation, sanitization, and parsing together in one typed definition.
 
   </td>
 </tr>

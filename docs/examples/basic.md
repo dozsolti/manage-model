@@ -23,9 +23,6 @@ const userModel = manageModel<User>()(
     validators: {
       hasName: (user) => user.name.length > 0,
     },
-    hooks: {
-      beforeCreate: (data) => ({ ...data, name: data.name.trim() }),
-    },
   },
 );
 ```
@@ -90,18 +87,6 @@ const userModel = manageModel<User>()(
         name: user.name.trim(),
         email: user.email.trim().toLowerCase(),
       }),
-    },
-    hooks: {
-      beforeCreate: (data) => ({
-        ...data,
-        name: String(data.name ?? "").trim(),
-        email: String(data.email ?? "")
-          .trim()
-          .toLowerCase(),
-      }),
-      afterCreate: (user) => {
-        console.log("User created:", user);
-      },
     },
   },
 );

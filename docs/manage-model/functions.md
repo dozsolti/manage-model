@@ -2,7 +2,7 @@
 
 `ModelManager<T>` describes the behavior layer attached to the model.
 ::: info
-This is where conversion, validation, sorting, and lifecycle hooks are declared.
+This is where conversion, validation, and sorting are declared.
 :::
 
 ## `to`
@@ -78,24 +78,6 @@ const model = manageModel<{ name: string }>()(
   {
     sanitizers: {
       trimName: (user) => ({ ...user, name: user.name.trim() }),
-    },
-  },
-);
-```
-
-## `hooks`
-
-Executes logic before and after model creation.
-
-```ts
-const model = manageModel<{ name: string }>()(
-  {},
-  {
-    hooks: {
-      beforeCreate: (data) => ({ ...data, name: data.name?.trim() ?? "" }),
-      afterCreate: (user) => {
-        console.log("Created user:", user);
-      },
     },
   },
 );

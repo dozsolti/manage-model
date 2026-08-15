@@ -19,11 +19,6 @@ export type ModelManager<T> = {
   sorters?: { [key: string]: (a: T, b: T) => number };
   validators?: { [key: string]: (model: T) => boolean };
   sanitizers?: { [key: string]: (model: T) => T };
-
-  hooks?: {
-    beforeCreate?: (data: any) => any;
-    afterCreate?: (data: T) => void;
-  };
 };
 
 type ModelFactory<T> = {

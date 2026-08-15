@@ -102,7 +102,7 @@ const userModel = manageModel<{ name: string }>()({
 
 `ModelManager<T>` describes the behavior layer attached to the model.
 ::: info
-This is where conversion, validation, sorting, and lifecycle hooks are declared.
+This is where conversion, validation, and sorting are declared.
 :::
 
 ### `to`
@@ -183,24 +183,6 @@ const model = manageModel<{ name: string }>()(
 );
 ```
 
-### `hooks`
-
-Executes logic before and after model creation.
-
-```ts
-const model = manageModel<{ name: string }>()(
-  {},
-  {
-    hooks: {
-      beforeCreate: (data) => ({ ...data, name: data.name?.trim() ?? "" }),
-      afterCreate: (user) => {
-        console.log("Created user:", user);
-      },
-    },
-  },
-);
-```
-
 ---
 
 ## Usage pattern
@@ -227,9 +209,6 @@ const userModel = manageModel<User>()(
     },
     validators: {
       hasName: (user) => user.name.length > 0,
-    },
-    hooks: {
-      beforeCreate: (data) => ({ ...data, name: data.name.trim() }),
     },
   },
 );
@@ -295,18 +274,6 @@ const userModel = manageModel<User>()(
         name: user.name.trim(),
         email: user.email.trim().toLowerCase(),
       }),
-    },
-    hooks: {
-      beforeCreate: (data) => ({
-        ...data,
-        name: String(data.name ?? "").trim(),
-        email: String(data.email ?? "")
-          .trim()
-          .toLowerCase(),
-      }),
-      afterCreate: (user) => {
-        console.log("User created:", user);
-      },
     },
   },
 );

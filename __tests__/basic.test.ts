@@ -71,18 +71,6 @@ test("Complete example", () => {
           email: user.email.trim().toLowerCase(),
         }),
       },
-      hooks: {
-        beforeCreate: (data) => ({
-          ...data,
-          name: String(data.name ?? "").trim(),
-          email: String(data.email ?? "")
-            .trim()
-            .toLowerCase(),
-        }),
-        afterCreate: (user) => {
-          console.log("User created:", user);
-        },
-      },
     },
   );
 

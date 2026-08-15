@@ -48,7 +48,6 @@ export default defineConfig({
                 text: "sanitizers",
                 link: "/manage-model/functions#sanitizers",
               },
-              { text: "hooks", link: "/manage-model/functions#hooks" },
             ],
           },
         ],

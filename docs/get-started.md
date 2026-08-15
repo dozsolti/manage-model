@@ -1,6 +1,6 @@
 # Get Started
 
-`manage-model` helps you define reusable model factories with typed templates, initialization helpers, validation, sanitization, parsing, and lifecycle hooks.
+`manage-model` helps you define reusable model factories with typed templates, initialization helpers, validation, sanitization, parsing, and many more.
 
 ## Install
 
@@ -74,15 +74,6 @@ const userModel = manageModel<User>()(
         email: user.email.trim().toLowerCase(),
       }),
     },
-    hooks: {
-      beforeCreate: (data) => ({
-        ...data,
-        name: String(data.name ?? "").trim(),
-        email: String(data.email ?? "")
-          .trim()
-          .toLowerCase(),
-      }),
-    },
   },
 );
 ```
@@ -127,15 +118,6 @@ const userModel = manageModel<User>()(
         ...user,
         name: user.name.trim(),
         email: user.email.trim().toLowerCase(),
-      }),
-    },
-    hooks: {
-      beforeCreate: (data) => ({
-        ...data,
-        name: String(data.name ?? "").trim(),
-        email: String(data.email ?? "")
-          .trim()
-          .toLowerCase(),
       }),
     },
   },
