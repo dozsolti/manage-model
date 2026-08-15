@@ -1,0 +1,8 @@
+{
+ "extends": "./tsconfig.json",
+ "compilerOptions": {
+  "outDir": "dist/cjs" /* Specify an output folder for all emitted files. */,
+  "declarationDir": "dist/types" /* Specify an output folder for all .d.ts emitted files */,
+  "module": "CommonJS" /* Specify what module code is generated. */,
+ }
+}

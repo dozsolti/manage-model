@@ -1,0 +1,35 @@
+{
+  "name": "manage-model",
+  "version": "0.0.1",
+  "description": "Every state changes in a single place.",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "types": "./dist/types/index.d.ts",
+  "module": "./dist/esm/index.js",
+  "source": "./src/index.ts",
+  "scripts": {
+    "build": "npm run clean && tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json",
+    "clean": "rm -rf dist",
+    "test": "vitest"
+  },
+  "author": "Zsolt Domotor",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^7.0.2",
+    "vitest": "^3.2.7"
+  },
+  "files": [
+    "dist/cjs",
+    "dist/esm",
+    "dist/types"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js",
+      "default": "./dist/esm/index.js"
+    }
+  }
+}

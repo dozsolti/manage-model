@@ -1,0 +1,8 @@
+{
+ "extends": "./tsconfig.json",
+ "compilerOptions": {
+  "outDir": "dist/esm" /* Specify an output folder for all emitted files. */,
+  "declarationDir": "dist/types" /* Specify an output folder for all .d.ts emitted files */,
+  "module": "ESNext" /* Specify what module code is generated. */,
+ }
+}
