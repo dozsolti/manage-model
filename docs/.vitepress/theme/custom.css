@@ -1,9 +1,9 @@
 :root {
-  --vp-c-brand-1: #1f7d53;
-  --vp-c-brand-2: #1f7d53;
-  --vp-c-brand-3: #1f7d53;
+  --vp-c-brand-1: hsl(153, 56%, 49%);
+  --vp-c-brand-2: hsl(153, 56%, 40%);
+  --vp-c-brand-3: hsl(153, 56%, 40%);
 }
 .dark {
-  --vp-c-bg: hsl(0, 0%, 2%);
-  --vp-c-bg-alt: hsl(0, 0%, 6%);
+  --vp-c-bg: hsl(0, 0%, 7%);
+  --vp-c-bg-alt: hsl(0, 0%, 12%);
 }

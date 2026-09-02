@@ -42,22 +42,22 @@ export const userModel = manageModel<User>()(
     },
   },
   ({ templates }) => ({
-    parsers: {
+    parse: {
       json: {
         to: (model: User) => JSON.stringify(model),
         from: (dto) => (dto ? JSON.parse(dto) : templates.default),
       },
     },
     to: {
-      fromObject: (data) => ({ name: data.name, email: data.email }),
+      object: (data) => ({ name: data.name, email: data.email }),
     },
-    sorters: {
+    sorter: {
       byName: (a, b) => a.name.localeCompare(b.name),
     },
-    validators: {
+    validate: {
       isValidEmail: (user) => /.+@.+\..+/.test(user.email),
     },
-    sanitizers: {
+    sanitize: {
       normalize: (user) => ({
         ...user,
         name: user.name.trim(),
@@ -75,6 +75,6 @@ const user = userModel.inits.fromApi({
 });
 
 // signup.tsx
-const cleanUser = userModel.sanitizers.normalize(user);
-const isValid = userModel.validators.hasValidEmail(cleanUser);
+const cleanUser = userModel.sanitize.normalize(user);
+const isValid = userModel.validate.hasValidEmail(cleanUser);
 ```

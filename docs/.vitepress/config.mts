@@ -8,12 +8,6 @@ export default defineConfig({
   base: "/manage-model/",
 
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
-    nav: [
-      { text: "Home", link: "/" },
-      { text: "Model Manager API", link: "/manage-model" },
-    ],
-
     footer: {
       message: "Released under the MIT License.",
     },
@@ -27,34 +21,30 @@ export default defineConfig({
         items: [
           {
             text: "Constants",
-            link: "/manage-model/constants",
+            link: "/api/constants",
             items: [
-              { text: "templates", link: "/manage-model/constants#templates" },
-              { text: "inits", link: "/manage-model/constants#inits" },
+              { text: "templates", link: "/api/constants#templates" },
+              { text: "inits", link: "/api/constants#inits" },
             ],
           },
           {
             text: "Functions",
-            link: "/manage-model/functions",
+            link: "/api/functions",
             items: [
-              { text: "to", link: "/manage-model/functions#to" },
-              { text: "parsers", link: "/manage-model/functions#parsers" },
-              { text: "sorters", link: "/manage-model/functions#sorters" },
-              {
-                text: "validators",
-                link: "/manage-model/functions#validators",
-              },
-              {
-                text: "sanitizers",
-                link: "/manage-model/functions#sanitizers",
-              },
-            ],
+              "to",
+              "parse",
+              "sort",
+              "validate",
+              "sanitize",
+              "migrate",
+              "can",
+            ].map((fn) => ({ text: fn, link: `/api/functions#${fn}` })),
           },
         ],
       },
       {
         text: "Examples",
-        items: [{ text: "Basic Usage", link: "/examples/basic" }],
+        items: [{ text: "Usage", link: "/examples/basic" }],
       },
     ],
 

@@ -205,7 +205,7 @@ const userModel = manageModel<User>()(
   },
   {
     to: {
-      fromObject: (data) => ({ name: data.name }),
+      object: (data) => ({ name: data.name }),
     },
     validators: {
       hasName: (user) => user.name.length > 0,
@@ -246,7 +246,7 @@ const userModel = manageModel<User>()(
   },
   {
     to: {
-      fromObject: (data) => ({
+      object: (data) => ({
         id: data.id,
         name: data.name,
         email: data.email,
@@ -278,7 +278,7 @@ const userModel = manageModel<User>()(
   },
 );
 
-const created = userModel.inits?.fromApi({
+const created = userModel.inits.fromApi({
   id: 1,
   name: "Jane Doe",
   email: "JANE@EXAMPLE.COM",

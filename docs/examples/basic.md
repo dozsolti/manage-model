@@ -18,7 +18,7 @@ const userModel = manageModel<User>()(
   },
   {
     to: {
-      fromObject: (data) => ({ name: data.name }),
+      object: (data) => ({ name: data.name }),
     },
     validators: {
       hasName: (user) => user.name.length > 0,
@@ -30,13 +30,6 @@ const userModel = manageModel<User>()(
 ## Complete example
 
 ```ts
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  age: number;
-};
-
 const userModel = manageModel<User>()(
   {
     templates: {
@@ -59,14 +52,14 @@ const userModel = manageModel<User>()(
   },
   {
     to: {
-      fromObject: (data) => ({
+      object: (data) => ({
         id: data.id,
         name: data.name,
         email: data.email,
         age: data.age,
       }),
     },
-    parsers: {
+    parse: {
       localStorage: {
         from: (raw) => {
           const parsed = JSON.parse(raw as string) as Partial<User>;
@@ -75,13 +68,13 @@ const userModel = manageModel<User>()(
         to: (model) => JSON.stringify(model),
       },
     },
-    sorters: {
+    sort: {
       byName: (a, b) => a.name.localeCompare(b.name),
     },
-    validators: {
+    validate: {
       hasValidEmail: (user) => /.+@.+\..+/.test(user.email),
     },
-    sanitizers: {
+    sanitize: {
       normalize: (user) => ({
         ...user,
         name: user.name.trim(),
@@ -91,16 +84,16 @@ const userModel = manageModel<User>()(
   },
 );
 
-const created = userModel.inits?.fromApi({
+const created = userModel.inits.fromApi({
   id: 1,
   name: "Jane Doe",
   email: "JANE@EXAMPLE.COM",
   age: 28,
 });
 
-const normalized = userModel.sanitizers.normalize(created);
-const valid = userModel.validators.hasValidEmail(normalized);
-const stored = userModel.parsers.localStorage.to(normalized);
+const normalized = userModel.sanitize.normalize(created);
+const valid = userModel.validate.hasValidEmail(normalized);
+const stored = userModel.parse.localStorage.to(normalized);
 ```
 
 This pattern keeps model creation logic centralized while still allowing typed, reusable definitions for templates, creation, parsing, and validation.

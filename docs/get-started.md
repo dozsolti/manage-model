@@ -14,46 +14,9 @@ npm install manage-model
 import { manageModel } from "manage-model";
 ```
 
-## Basic usage
+## Usage
 
 ```ts
-type User = {
-  id: string;
-  name: string;
-  email: string;
-};
-
-const userModel = manageModel<User>()({
-  templates: {
-    guest: { id: "guest", name: "Guest", email: "" },
-  },
-  inits: {
-    fromApi: (data) => ({
-      id: String(data.id ?? "guest"),
-      name: String(data.name ?? "Guest"),
-      email: String(data.email ?? ""),
-    }),
-  },
-});
-
-const guest = userModel.templates.guest;
-const created = userModel.inits?.fromApi({
-  id: 42,
-  name: "Jane Doe",
-  email: "jane@example.com",
-});
-```
-
-## Add behavior with a builder
-
-You can extend the model with a second argument that defines runtime behavior.
-
-```ts
-type User = {
-  name: string;
-  email: string;
-};
-
 const userModel = manageModel<User>()(
   {
     templates: {
@@ -62,12 +25,12 @@ const userModel = manageModel<User>()(
   },
   {
     to: {
-      fromObject: (data) => ({ name: data.name, email: data.email }),
+      object: (data) => ({ name: data.name, email: data.email }),
     },
-    validators: {
-      hasEmail: (user) => /.+@.+\..+/.test(user.email),
+    validate: {
+      email: (user) => /.+@.+\..+/.test(user.email),
     },
-    sanitizers: {
+    sanitize: {
       normalize: (user) => ({
         ...user,
         name: user.name.trim(),
@@ -76,61 +39,6 @@ const userModel = manageModel<User>()(
     },
   },
 );
-```
-
-## Example: create a user model
-
-```ts
-type User = {
-  id: string;
-  name: string;
-  email: string;
-};
-
-const userModel = manageModel<User>()(
-  {
-    templates: {
-      default: { id: "default", name: "Anonymous", email: "" },
-    },
-    inits: {
-      fromApi: (payload) => ({
-        id: String(payload.id ?? "user-1"),
-        name: String(payload.name ?? "Anonymous"),
-        email: String(payload.email ?? ""),
-      }),
-    },
-  },
-  {
-    parsers: {
-      json: {
-        from: (raw) => JSON.parse(raw as string) as User,
-        to: (model) => JSON.stringify(model),
-      },
-    },
-    sorters: {
-      byName: (a, b) => a.name.localeCompare(b.name),
-    },
-    validators: {
-      hasValidEmail: (user) => /.+@.+\..+/.test(user.email),
-    },
-    sanitizers: {
-      normalize: (user) => ({
-        ...user,
-        name: user.name.trim(),
-        email: user.email.trim().toLowerCase(),
-      }),
-    },
-  },
-);
-
-const user = userModel.inits?.fromApi({
-  id: 123,
-  name: "   Jane Doe   ",
-  email: "JANE@EXAMPLE.COM",
-});
-
-const cleanUser = userModel.sanitizers?.normalize(user!);
-const isValid = userModel.validators?.hasValidEmail(cleanUser!);
 ```
 
 ## Why use it

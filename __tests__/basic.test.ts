@@ -42,14 +42,14 @@ test("Complete example", () => {
     },
     {
       to: {
-        fromObject: (data) => ({
+        object: (data) => ({
           id: data.id,
           name: data.name,
           email: data.email,
           age: data.age,
         }),
       },
-      parsers: {
+      parse: {
         localStorage: {
           from: (raw) => {
             const parsed = JSON.parse(raw as string) as Partial<User>;
@@ -58,13 +58,13 @@ test("Complete example", () => {
           to: (model: any) => JSON.stringify(model),
         },
       },
-      sorters: {
+      sort: {
         byName: (a, b) => a.name.localeCompare(b.name),
       },
-      validators: {
+      validate: {
         hasValidEmail: (user) => /.+@.+\..+/.test(user.email),
       },
-      sanitizers: {
+      sanitize: {
         normalize: (user) => ({
           ...user,
           name: user.name.trim(),
@@ -74,17 +74,17 @@ test("Complete example", () => {
     },
   );
 
-  const created = userModel.inits?.fromApi({
+  const created = userModel.inits.fromApi({
     id: 1,
     name: "Jane Doe",
     email: "JANE@EXAMPLE.COM",
     age: 28,
   });
 
-  const normalized = userModel.sanitizers.normalize(created);
-  const valid = userModel.validators.hasValidEmail(normalized);
+  const normalized = userModel.sanitize.normalize(created);
+  const valid = userModel.validate.hasValidEmail(normalized);
   expect(valid).toBe(true);
-  const stored = userModel.parsers.localStorage.to(normalized);
+  const stored = userModel.parse.localStorage.to(normalized);
   expect(stored).toBe(
     '{"id":"1","name":"Jane Doe","email":"jane@example.com","age":28}',
   );

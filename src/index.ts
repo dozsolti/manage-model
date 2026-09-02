@@ -1,24 +1,26 @@
-type CreatorFunction<T> = (data: T, ...args: any[]) => any;
-
 export type ModelManagerConstants<T> = {
   templates?: Record<string, T>;
-  inits?: Record<string, (data: any, ...args: any[]) => T>;
+  inits?: Record<string, (...args: any[]) => T>;
 };
 
 export type ModelManager<T> = {
-  to?: { [key: string]: CreatorFunction<T> };
+  to?: { [key: string]: (data: T, ...args: any[]) => any };
 
-  parsers?: {
+  parse?: {
     [key: string]: {
       from: (...args: any[]) => T | null;
       to: ((model: T) => any) | ((...args: any[]) => any);
-      [key: string]: (...args: any[]) => any; // fromXYZ, toXYZ
+
+      [key: `from${string}`]: (...args: any[]) => T | null;
+      [key: `to${string}`]: ((model: T) => any) | ((...args: any[]) => any);
     };
   };
 
-  sorters?: { [key: string]: (a: T, b: T) => number };
-  validators?: { [key: string]: (model: T) => boolean };
-  sanitizers?: { [key: string]: (model: T) => T };
+  sort?: { [key: string]: (a: T, b: T) => number };
+  validate?: { [key: string]: (model: T) => boolean };
+  sanitize?: { [key: string]: (model: T) => T };
+  migrate?: { [key: string]: (...args: any[]) => any };
+  can?: { [key: string]: (model: T, ...args: any[]) => boolean };
 };
 
 type ModelFactory<T> = {

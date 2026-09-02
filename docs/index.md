@@ -11,7 +11,7 @@ hero:
       link: /get-started
     - theme: alt
       text: Documentation
-      link: /manage-model
+      link: /api/constants
 ---
 
 `manage-model` helps you define typed templates, initialization helpers, validation, sanitization, parsing, and many more.
@@ -110,33 +110,23 @@ export const onLoginPressed = (data) => {
 
 // api.ts
 export const getUser = async () => {
-  return axios
-    .get("/api/user")
-    .then((res) => res.json())
+    //...
     .then(userModel.parsers.api.from);
 };
-
 export const signUp = async () => {
-  return (
-    axios
-      .post("/api/user")
-      // ...
-      .then(userModel.parsers.api.from);
-  );
+  // ...
+  .then(userModel.parsers.api.from);
 };
+
 // signUp.tsx
 export const onFormSubmit = (data) => {
-  if (!userModel.validators.isValid(data)) {
-    return;
-  }
+  if (!userModel.validators.isValid(data)) return;
   // ...
 };
 
 // profile.tsx
 export const onNameChange = (data) => {
-  if (!userModel.validators.isValid(data)) {
-    return;
-  }
+  if (!userModel.validators.isValid(data)) return;
   // ...
 };
 ```
@@ -151,20 +141,26 @@ Keep related templates, initialization, validation, sanitization, and parsing to
 
 ```ts
 // user.model.ts
-const userModel = manageModel<User>()({
-  templates: {
-    guest: { id: "guest", name: "Guest", email: "" },
+const userModel = manageModel<User>()(
+  {
+    templates: {
+      guest: { id: "guest", name: "Guest", email: "" },
+    },
+    inits: {
+      fromApi: (data) => ({
+        id: String(data.id ?? "guest"),
+        name: String(data.name ?? "Guest"),
+        email: String(data.email ?? ""),
+      }),
+    },
   },
-  inits: {
-    fromApi: (data) => ({
-      id: String(data.id ?? "guest"),
-      name: String(data.name ?? "Guest"),
-      email: String(data.email ?? ""),
-    }),
+  {
+    validate: {
+      isValid: (user) =>
+        typeof data.name == "string" &&
+        data.name &&
+        data.name.trim().length > 0,
+    },
   },
-  validations: {
-    isValid: (user) =>
-      typeof data.name == "string" && data.name && data.name.trim().length > 0,
-  },
-});
+);
 ```
